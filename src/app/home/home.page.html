@@ -1,0 +1,103 @@
+<ion-content [fullscreen]="true">
+  
+  <ion-card>
+
+    <form [formGroup]="form">
+      <div class="ion-text-center ion-margin-vertical lock">
+        <ion-icon name="lock-closed"></ion-icon>
+      </div>
+
+      <ion-item lines="none" class="ion-margin-horizontal ion-margin-top">
+        <ion-button slot="start" fill="clear" color="medium">
+          <ion-icon slot="icon-only" name="mail-outline"></ion-icon>
+        </ion-button>
+        <ion-input
+          labelPlacement="floating"
+          type="email"
+          inputmode="email"
+          formControlName="email"
+          placeholder="Enter email address"
+          errorText="* Enter proper email address"
+          enterkeyhint="next"
+        >
+          <div slot="label">Email <ion-text color="danger">*</ion-text></div>
+        </ion-input>
+      </ion-item>
+
+      <ion-item class="ion-margin" lines="none">
+        <ion-button slot="start" fill="clear" color="dark">
+          <ion-icon slot="icon-only" name="key-outline"></ion-icon>
+        </ion-button>
+
+        <ion-input
+          labelPlacement="floating"
+          [type]="isPwd ? 'text' : 'password'"
+          [inputmode]="isPwd ? 'text' : 'password'"
+          placeholder="Enter password"
+          formControlName="password"
+          [errorText]="form.get('password')!.hasError('minlength') ? '* Password must be min. 8 characters long' : '* Enter a proper password'"
+          enterkeyhint="enter"
+        >
+          <div slot="label">Password <ion-text color="danger">*</ion-text></div>
+        </ion-input>
+        <ion-button
+          slot="end"
+          fill="clear"
+          color="danger"
+          (click)="togglePwd()"
+        >
+          <ion-icon
+            slot="icon-only"
+            [name]="isPwd ? 'eye-off-outline' : 'eye-outline'"
+          ></ion-icon>
+        </ion-button>
+      </ion-item>
+
+      <div class="ion-text-right ion-margin-horizontal">
+        <ion-text class="fwd" color="light">Forgot Password?</ion-text>
+      </div>
+
+      <div class="ion-margin submit" (click)="onSubmit()">
+        <ion-button expand="block" size="large">
+          <ion-text><strong>Log In</strong></ion-text>
+        </ion-button>
+      </div>
+    </form>
+
+    <!-- verify face id -->
+    <ion-row class="ion-margin authorize">
+      <ion-col size="9">
+        <ion-button
+          expand="block"
+          size="large"
+          class="faceid"
+          (click)="performBiometricVerification()"
+        >
+          <ion-text class="ion-text-wrap">
+            <strong> Authorize with Biometric </strong>
+            <span> (Face ID / FingerPrint) </span>
+          </ion-text>
+        </ion-button>
+      </ion-col>
+      <ion-col size="3">
+        <ion-button
+          expand="block"
+          size="large"
+          color="light"
+          (click)="deleteCredentials()"
+        >
+          <ion-icon slot="icon-only" name="trash" color="danger"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
+
+  <ion-toast 
+    [isOpen]="isToast" 
+    [message]="toastMessage" 
+    [duration]="3000"
+    (didDismiss)="isToast = false">
+  </ion-toast>
+
+</ion-content>

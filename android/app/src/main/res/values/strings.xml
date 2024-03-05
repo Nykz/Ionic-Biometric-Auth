@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">face-id-app</string>
+    <string name="title_activity_main">face-id-app</string>
+    <string name="package_name">com.technyks.faceid</string>
+    <string name="custom_url_scheme">com.technyks.faceid</string>
+</resources>
